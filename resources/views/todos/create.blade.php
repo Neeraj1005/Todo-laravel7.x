@@ -8,17 +8,27 @@
     <a href="{{route('todos.index')}}" class="cursor-pointer text-gray-500 px-2">
         <span class="fas fa-arrow-left" />
     </a>
-
 </div>
 <x-alert />
 <form action="{{route('todos.store')}}" method="post" class="py-5">
     @csrf
     <div class="py-1">
-        <input type="text" name="title" class="border shadow appearance-none border rounded py-2 px-3" placeholder="title">
+        <input type="text" name="title" class="border shadow appearance-none border rounded py-2 px-3" placeholder="Title">
 
     </div>
     <div class="py-1">
-        <textarea name="description" id="description" cols="30" rows="10" class="shadow appearance-none border rounded " placeholder="description"></textarea>
+        <textarea name="description" id="description" class="p-2 rounded border " placeholder="Description"></textarea>
+    </div>
+
+
+    <div class="py-2">
+        <div class="flex justify-center">
+            <h5 class="text-2xl pb-4 px-4">Add steps</h5>
+            <a href="{{route('todos.index')}}" class="cursor-pointer text-blue-500 px-1 py-2">
+                <span class="fas fa-plus-circle" />
+            </a>
+        </div>
+        <input type="text" name="step" class="border shadow appearance-none border rounded py-2 px-3" placeholder="Add steps" />
     </div>
     <div class="py-1">
         <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full">
@@ -26,8 +36,9 @@
         </button>
 
     </div>
-    {{-- <input type="submit" value="create" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full"> --}}
 </form>
+
+
 @endsection
 
 
