@@ -73,9 +73,11 @@ class TodoController extends Controller
      * @param  \App\Todo  $todo
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Todo $todo)
+    public function update(TodoCreateRequest $request, Todo $todo)
     {
-        //
+        $todo->update($request->all());
+        return redirect(route('todos.index'))->with('message','Todo updated successfully');
+
     }
 
     /**
