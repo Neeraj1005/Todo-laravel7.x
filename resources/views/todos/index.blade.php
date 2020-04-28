@@ -36,6 +36,12 @@
                 @csrf
                 @method('delete')
             </form>
+    {{-- below another method --}}
+        {{-- <form method="post" action="{{route('todos.destroy',$todo->id)}}">
+            @csrf
+            @method('delete')
+            <button type="submit" class="fas fa-trash cursor-pointer text-red-500 px-2" />
+            </form> --}}
         </div>
 
     </li>
