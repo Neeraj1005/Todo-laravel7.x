@@ -49,7 +49,7 @@ class TodoController extends Controller
         $request['user_id'] = $userId;
         $todo->create($request->all());
         */
-
+        dd($request->all());
         auth()->user()->todos()->create($request->all());
 
         return redirect(route('todos.index'))->with('message','Todo Created Successfully');
