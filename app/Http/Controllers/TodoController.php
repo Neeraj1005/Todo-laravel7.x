@@ -4,10 +4,15 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\TodoCreateRequest;
 use App\Todo;
+use Auth;
 use Illuminate\Http\Request;
 
 class TodoController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -37,9 +42,8 @@ class TodoController extends Controller
      */
     public function store(TodoCreateRequest $request, Todo $todo)
     {
-        // $request->validate([
-        //     'title' => 'required|unique:posts|max:255',
-        // ]);
+        $userId = auth()->id();
+        $request['user_id'] = $userId;
         $todo->create($request->all());
         return redirect()->back()->with('message','Todo Created Successfully');
     }
