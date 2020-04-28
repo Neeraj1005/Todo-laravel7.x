@@ -3,7 +3,7 @@
 
 
 @section('content')
-<h1 class="text-2xl">Create Todo:</h1>
+<h1 class="text-2xl border-b pb-4">Create Todo:</h1>
 <x-alert />
 <form action="{{route('todos.store')}}" method="post" class="py-5">
     @csrf

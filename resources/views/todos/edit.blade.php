@@ -3,7 +3,7 @@
 
 
 @section('content')
-<h1 class="text-2xl">Update Todo:</h1>
+<h1 class="text-2xl border-b pb-4">Update Todo:</h1>
 <x-alert />
 <form action="{{route('todos.update',$todo->id)}}" method="post" class="py-5">
     @csrf
