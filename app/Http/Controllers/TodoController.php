@@ -20,7 +20,9 @@ class TodoController extends Controller
      */
     public function index()
     {
-        $todos = Todo::orderBy('completed')->get();
+        // $todos = Todo::orderBy('completed')->get();
+        // $todos  =   auth()->user()->todos()->orderBy('completed')->get();//THis is relation
+        $todos  =   auth()->user()->todos->sortBy('completed'); //THis is collection where i used sortBY
         return view('todos.index',compact('todos'));
     }
 
