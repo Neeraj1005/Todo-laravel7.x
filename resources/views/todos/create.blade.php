@@ -30,7 +30,7 @@
         <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full">
             Create
         </button>
-
+        {{-- <input type="submit" value="Create" class="p-2 border rounded" /> --}}
     </div>
 </form>
 

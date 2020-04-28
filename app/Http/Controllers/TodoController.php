@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\TodoCreateRequest;
 use App\Todo;
+use App\Step;
 use Auth;
 use Illuminate\Http\Request;
 
@@ -42,15 +43,23 @@ class TodoController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(TodoCreateRequest $request, Todo $todo)
+    public function store(TodoCreateRequest $request)
     {
         /*
         $userId = auth()->id();
         $request['user_id'] = $userId;
         $todo->create($request->all());
         */
-        dd($request->all());
-        auth()->user()->todos()->create($request->all());
+        // dd($request->all());
+
+
+        $todo = auth()->user()->todos()->create($request->all());
+        //This if condition check if input name=>step is filled or not
+        if($request->step){
+            foreach ($request->step as $step) {
+                $todo->steps()->create(['name'=>$step]);
+            }
+        }
 
         return redirect(route('todos.index'))->with('message','Todo Created Successfully');
     }
