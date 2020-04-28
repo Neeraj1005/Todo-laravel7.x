@@ -52,7 +52,7 @@ class TodoController extends Controller
 
         auth()->user()->todos()->create($request->all());
 
-        return redirect()->back()->with('message','Todo Created Successfully');
+        return redirect(route('todos.index'))->with('message','Todo Created Successfully');
     }
 
     /**
@@ -63,7 +63,7 @@ class TodoController extends Controller
      */
     public function show(Todo $todo)
     {
-        //
+        return view('todos.show',compact('todo'));
     }
 
     /**

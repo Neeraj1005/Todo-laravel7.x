@@ -11,18 +11,16 @@
 </div>
 <x-alert />
 <ul class="my-5">
-    @foreach ($todos as $todo)
+    @forelse ($todos as $todo)
     <li class="flex justify-between py-2 px-2">
 
         <div>
             @include('todos.complete-button')
         </div>
 
-        @if ($todo->completed)
-        <p class="line-through">{{$todo->title}}</p>
-        @else
-        <p>{{$todo->title}}</p>
-        @endif
+        <a class="cursor-pointer" href="{{route('todos.show',$todo->id)}}">
+            <p class="{{($todo->completed) ? 'line-through' : ' '}}">{{$todo->title}}</p>
+        </a>
 
         <div>
             <a href="{{route('todos.edit',$todo->id)}}" class="text-orange-400 text-white cursor-pointer"><span class="fas fa-edit px-2" /></a>
@@ -45,8 +43,11 @@
         </div>
 
     </li>
+    @empty
 
-    @endforeach
+    <p>No task is created by you: create one</p>
+
+    @endforelse
 </ul>
 
 @endsection
