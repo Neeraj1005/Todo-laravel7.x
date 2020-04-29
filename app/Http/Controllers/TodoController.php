@@ -72,6 +72,7 @@ class TodoController extends Controller
      */
     public function show(Todo $todo)
     {
+        // $todo = $todo->steps;
         return view('todos.show',compact('todo'));
     }
 
@@ -108,6 +109,7 @@ class TodoController extends Controller
      */
     public function destroy(Todo $todo)
     {
+        $todo->steps->each->delete();//THis will first delete the steps and then todo
         $todo->delete();
         return redirect()->back()->with('message','Task is completely deleted');
     }

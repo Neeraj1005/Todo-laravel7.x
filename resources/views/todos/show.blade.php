@@ -12,7 +12,18 @@
 </div>
 <x-alert />
     <div class="py-1">
-    <p>{{$todo->description}}</p>
+    <p>Discription:: {{$todo->description}}</p>
+    </div>
+    <div>
+
+        @forelse ($todo->steps as $step)
+            <h3>Steps{{$loop->index + 1}}</h3>
+            <p>{{$step->name}}</p>
+        @empty
+        <p>No steps for this</p>
+        @endforelse
+    <div>
+
     </div>
 @endsection
 
