@@ -23,13 +23,15 @@
         </a>
 
         <div>
-            <a href="{{route('todos.edit',$todo->id)}}" class="text-orange-400 text-white cursor-pointer"><span class="fas fa-edit px-2" /></a>
+            <a href="{{route('todos.edit',$todo->id)}}" class="text-orange-400 text-white cursor-pointer">
+                <span class="fas fa-pen px-2" />
+            </a>
 
             <span onclick="event.preventDefault();
                             if(confirm('Are you sure!')){
                             document.getElementById('form-delete-{{$todo->id}}')
                             .submit()}"
-                            class="fas fa-trash cursor-pointer text-red-500 px-2" />
+                            class="fas fa-times cursor-pointer text-red-500 px-2" />
             <form style="display:none" id="{{'form-delete-'.$todo->id}}" method="post" action="{{route('todos.destroy',$todo->id)}}">
                 @csrf
                 @method('delete')

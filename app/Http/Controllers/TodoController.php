@@ -96,7 +96,19 @@ class TodoController extends Controller
      */
     public function update(TodoCreateRequest $request, Todo $todo)
     {
+
         $todo->update($request->all());
+        if($request->stepName){
+            foreach ($request->stepName as $key => $value) {
+                $id = $request->stepId[$key];
+                if (!$id) {
+                    $todo->steps()->create(['name'=>$value]);
+                } else {
+                    $step = Step::find($id);
+                    $step->update(['name'=>$value]);
+                }
+            }
+        }
         return redirect(route('todos.index'))->with('message','Todo updated successfully');
 
     }

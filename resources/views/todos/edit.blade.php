@@ -16,12 +16,15 @@
     @csrf
     @method('put')
     <div class="py-1">
-        <input type="text" name="title" class="border shadow appearance-none border rounded py-2 px-3" value="{{$todo->title}}">
+        <input type="text" name="title" class="py-2 px-2 border rounded" value="{{$todo->title}}">
     </div>
     <div class="py-1">
-        <textarea name="description" id="description" cols="30" rows="10" class="shadow appearance-none border rounded " placeholder="description">
+        <textarea name="description" id="description" cols="30" rows="10" class="p-2 rounded border " placeholder="description">
             {{$todo->description}}
         </textarea>
+    </div>
+    <div class="py-2">
+        @livewire('edit-step', ['steps' => $todo->steps])
     </div>
     <div class="py-1">
         <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full">
