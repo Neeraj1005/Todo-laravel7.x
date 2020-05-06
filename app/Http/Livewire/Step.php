@@ -12,10 +12,10 @@ class Step extends Component
     {
         $this->steps[] = count($this->steps);
     }
+
     public function decrement($index)
     {
         unset($this->steps[$index]);
-
     }
 
     public function render()

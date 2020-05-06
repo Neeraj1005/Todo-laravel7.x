@@ -2,7 +2,6 @@
 
 namespace App;
 
-use App\Step;
 use Illuminate\Database\Eloquent\Model;
 
 class Todo extends Model
