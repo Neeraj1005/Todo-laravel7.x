@@ -1,8 +1,8 @@
 <?php
 
 namespace App\Http\Livewire;
-use App\Step;
 
+use App\Step;
 use Livewire\Component;
 
 class EditStep extends Component
@@ -11,7 +11,7 @@ class EditStep extends Component
 
     public function mount($steps)
     {
-       $this->steps = $steps->toArray();
+        $this->steps = $steps->toArray();
     }
 
     public function increment()
@@ -22,11 +22,10 @@ class EditStep extends Component
     public function decrement($index)
     {
         $step = $this->steps[$index];
-        if(isset($step['id'])){//this if check condition if newly create then no delete operation execute
+        if (isset($step['id'])) {//this if check condition if newly create then no delete operation execute
             Step::find($step['id'])->delete();
         }
         unset($this->steps[$index]);
-
     }
 
     public function render()

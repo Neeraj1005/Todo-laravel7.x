@@ -3,10 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\TodoCreateRequest;
-use App\Todo;
 use App\Step;
+use App\Todo;
 use Auth;
-use Illuminate\Http\Request;
 
 class TodoController extends Controller
 {
@@ -14,6 +13,7 @@ class TodoController extends Controller
     {
         $this->middleware('auth');
     }
+
     /**
      * Display a listing of the resource.
      *
@@ -23,8 +23,8 @@ class TodoController extends Controller
     {
         // $todos = Todo::orderBy('completed')->get();
         // $todos  =   auth()->user()->todos()->orderBy('completed')->get();//THis is relation
-        $todos  =   auth()->user()->todos->sortBy('completed'); //THis is collection where i used sortBY
-        return view('todos.index',compact('todos'));
+        $todos = auth()->user()->todos->sortBy('completed'); //THis is collection where i used sortBY
+        return view('todos.index', compact('todos'));
     }
 
     /**
@@ -52,16 +52,15 @@ class TodoController extends Controller
         */
         // dd($request->all());
 
-
         $todo = auth()->user()->todos()->create($request->all());
         //This if condition check if input name=>step is filled or not
-        if($request->step){
+        if ($request->step) {
             foreach ($request->step as $step) {
                 $todo->steps()->create(['name'=>$step]);
             }
         }
 
-        return redirect(route('todos.index'))->with('message','Todo Created Successfully');
+        return redirect(route('todos.index'))->with('message', 'Todo Created Successfully');
     }
 
     /**
@@ -73,7 +72,7 @@ class TodoController extends Controller
     public function show(Todo $todo)
     {
         // $todo = $todo->steps;
-        return view('todos.show',compact('todo'));
+        return view('todos.show', compact('todo'));
     }
 
     /**
@@ -84,7 +83,7 @@ class TodoController extends Controller
      */
     public function edit(Todo $todo)
     {
-        return view('todos.edit',compact('todo'));
+        return view('todos.edit', compact('todo'));
     }
 
     /**
@@ -96,12 +95,11 @@ class TodoController extends Controller
      */
     public function update(TodoCreateRequest $request, Todo $todo)
     {
-
         $todo->update($request->all());
-        if($request->stepName){
+        if ($request->stepName) {
             foreach ($request->stepName as $key => $value) {
                 $id = $request->stepId[$key];
-                if (!$id) {
+                if (! $id) {
                     $todo->steps()->create(['name'=>$value]);
                 } else {
                     $step = Step::find($id);
@@ -109,8 +107,8 @@ class TodoController extends Controller
                 }
             }
         }
-        return redirect(route('todos.index'))->with('message','Todo updated successfully');
 
+        return redirect(route('todos.index'))->with('message', 'Todo updated successfully');
     }
 
     /**
@@ -121,20 +119,23 @@ class TodoController extends Controller
      */
     public function destroy(Todo $todo)
     {
-        $todo->steps->each->delete();//THis will first delete the steps and then todo
+        $todo->steps->each->delete(); //THis will first delete the steps and then todo
         $todo->delete();
-        return redirect()->back()->with('message','Task is completely deleted');
+
+        return redirect()->back()->with('message', 'Task is completely deleted');
     }
 
     public function complete(Todo $todo)
     {
         $todo->update(['completed'=>1]);
-        return redirect()->back()->with('message','Task marked as completed');
+
+        return redirect()->back()->with('message', 'Task marked as completed');
     }
 
     public function incomplete(Todo $todo)
     {
         $todo->update(['completed'=>false]);
-        return redirect()->back()->with('message','Task marked as incompleted!');
+
+        return redirect()->back()->with('message', 'Task marked as incompleted!');
     }
 }
